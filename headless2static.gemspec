@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "headless2static generates static files from REST resource lists using a Liquid template."
   s.authors     = ["Jan Weil"]
   s.email       = 'jan.weil@web.de'
-  s.files       = ["bin/headless2static"]
+  s.executables << 'headless2static'
   s.homepage    = 'https://github.com/jawebada/headless2static'
   s.license     = 'MIT'
 end
