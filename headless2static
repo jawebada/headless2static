@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby2.7
+
+require 'optparse'
+require 'liquid'
+require 'jekyll' # register Jekyll's Liquid filters
+require 'open-uri'
+require 'json'
+
+options = {'o': '.'}
+OptionParser.new do |opt|
+  opt.banner = "usage: headless2static [options] template url..."
+  opt.on('-o DIR')
+end.parse!(into: options)
+
+$output_directory = options[:o]
+$template_file_name = ARGV.shift # this is the file name of the template
+$file_name_template = Liquid::Template.parse($template_file_name) # this is the template for the file names
+open($template_file_name) do |file|
+  $content_template = Liquid::Template.parse(file.read)
+end
+
+for url in ARGV do
+  URI.open(url) do |io|
+    json_result = JSON.parse(io.read)
+    for item in json_result['data'] do
+      file_name = $file_name_template.render(item)
+      puts "writing #{file_name}..."
+      content = $content_template.render(item)
+      File.write("#{$output_directory}/#{file_name}", content)
+    end
+  end
+end
