@@ -58,8 +58,7 @@ Imagine there is an endpoint of your headless CMS' API at
 }
 ```
 
-Create a [Liquid](https://shopify.github.io/liquid/) template called 
-`{{title | slugify}}.html`:
+Create a [Liquid](https://shopify.github.io/liquid/) template called `{{title | slugify}}.html`:
 
 ```liquid
 ---
@@ -72,7 +71,7 @@ navigation_title: {{navigation_title}}
 
 Calling
 
-```
+```shell
 headless2static '{{title | slugify}}.html' https://example.com/api/items/pages
 ```
 
