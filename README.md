@@ -61,8 +61,7 @@ Imagine there is an endpoint of your headless CMS' API at
 Create a [Liquid](https://shopify.github.io/liquid/) template called 
 `{{title | slugify}}.html`:
 
-
-```
+```liquid
 ---
 layout: page
 title: {{title}}
@@ -82,7 +81,7 @@ will render two files:
 
 `a-test.html`:
 
-```
+```html
 ---
 layout: page
 title: A Test
@@ -99,7 +98,7 @@ navigation_title: Test
 
 and `another-page.html`:
 
-```
+```html
 ---
 layout: page
 title: Another Page
