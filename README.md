@@ -68,7 +68,6 @@ title: {{title}}
 navigation_title: {{navigation_title}}
 ---
 {{content}}
-
 ```
 
 Calling
