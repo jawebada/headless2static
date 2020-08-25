@@ -1,5 +1,12 @@
 # headless2static
 
+## Synopsis
+
+`headless2static` renders collections of REST resources to static files using a
+[Liquid](https://shopify.github.io/liquid/) template.
+
+## Introduction
+
 Are you considering using a [headless content management system
 (CMS)](https://en.wikipedia.org/wiki/Headless_content_management_system)?
 
