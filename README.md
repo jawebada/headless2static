@@ -1,3 +1,5 @@
+{% raw %}
+
 # headless2static
 
 ## Synopsis
@@ -58,11 +60,8 @@ Imagine there is an endpoint of your headless CMS' API at
 }
 ```
 
-{% raw %}
 Create a [Liquid](https://shopify.github.io/liquid/) template called `{{title | slugify}}.html`:
-{% endraw %}
 
-{% raw %}
 ```liquid
 ---
 layout: page
@@ -70,15 +69,13 @@ title: {{title}}
 navigation_title: {{navigation_title}}
 ---
 {{content}}
-{% endraw %}
+```
 
 Calling
 
-{% raw %}
 ```shell
 headless2static '{{title | slugify}}.html' https://example.com/api/items/pages
 ```
-{% endraw %}
 
 will render two files:
 
@@ -109,3 +106,5 @@ navigation_title:
 ---
 <p>It works!</p>
 ```
+
+{% endraw %}
