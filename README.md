@@ -60,7 +60,8 @@ Imagine there is an endpoint of your headless CMS' API at
 }
 ```
 
-Create a [Liquid](https://shopify.github.io/liquid/) template called `{{title | slugify}}.html`:
+Create a [Liquid](https://shopify.github.io/liquid/) template called `{{title |
+slugify}}.html` (yes, that *is* the file name):
 
 ```liquid
 ---
@@ -106,5 +107,17 @@ navigation_title:
 ---
 <p>It works!</p>
 ```
+
+## Usage
+
+```shell
+usage: headless2static [options] template_file url
+    -o, --output-directory=DIR       directory in which the output files are saved
+    -f, --force                      overwrite existing files
+```
+
+## Installation
+
+`headless2static` is written in Ruby and available as a gem.
 
 {% endraw %}
