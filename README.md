@@ -4,7 +4,8 @@
 
 ## Synopsis
 
-`headless2static` renders collections of REST resources to static files using a
+`headless2static` is a simple command line pogram which renders collections of
+REST resources to static files using a
 [Liquid](https://shopify.github.io/liquid/) template.
 
 ## Introduction
@@ -108,7 +109,7 @@ navigation_title:
 <p>It works!</p>
 ```
 
-## Usage
+## Invocation
 
 ```
 usage: headless2static [options] template_file url
