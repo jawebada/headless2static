@@ -110,7 +110,7 @@ navigation_title:
 
 ## Usage
 
-```shell
+```
 usage: headless2static [options] template_file url
     -o, --output-directory=DIR       directory in which the output files are saved
     -f, --force                      overwrite existing files
