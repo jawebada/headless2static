@@ -45,7 +45,14 @@ $url = ARGV.shift
 
 URI.open($url) do |io|
   json_result = JSON.parse(io.read)
-  for item in json_result['data'] do
+  if json_result.is_a?(Array)
+    data_array = json_result
+  elsif json_result.key?('data') and json_result['data'].is_a?(Array)
+    data_array = json_result['data']
+  else
+    data_array = [json_result]
+  end
+  for item in data_array do
     file_name = $file_name_template.render(item)
 
     output_path = "#{$output_directory}/#{file_name}"
