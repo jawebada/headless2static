@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
   s.authors     = ["Jan Weil"]
   s.email       = 'jan.weil@web.de'
   s.executables << 'headless2static'
-  s.homepage    = 'https://github.com/jawebada/headless2static'
+  s.homepage    = 'https://jawebada.github.io/headless2static/'
   s.license     = 'MIT'
 end
