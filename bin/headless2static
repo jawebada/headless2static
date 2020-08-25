@@ -6,27 +6,57 @@ require 'jekyll' # register Jekyll's Liquid filters
 require 'open-uri'
 require 'json'
 
-options = {'o': '.'}
-OptionParser.new do |opt|
-  opt.banner = "usage: headless2static [options] template url..."
-  opt.on('-o DIR')
-end.parse!(into: options)
+$options = {:"output-directory" => '.'}
 
-$output_directory = options[:o]
-$template_file_name = ARGV.shift # this is the file name of the template
-$file_name_template = Liquid::Template.parse($template_file_name) # this is the template for the file names
+parser = OptionParser.new do |opt|
+  opt.banner = "usage: headless2static [options] template_file url..."
+  opt.on("-o DIR", "--output-directory=DIR", "directory in which the output files are saved")
+  opt.on("-f", "--force", "overwrite existing files")
+end
+
+parser.parse!(into: $options)
+if not ARGV.length() == 2
+  puts "missing argument"
+  puts parser.help()
+  exit
+end
+
+$output_directory = $options[:"output-directory"].sub(/\/$/, '')
+if not File.directory?($output_directory)
+  puts "output directory '#{$output_directory}' is not a directory"
+  exit
+end
+
+# this is the file name of the template
+$template_file_name = ARGV.shift
+if not File.file?($template_file_name)
+  puts "template file '#{$template_file_name}' is not a file"
+  exit
+end
+
+# this is the template for the file names
+$file_name_template = Liquid::Template.parse(File.basename($template_file_name))
+
 open($template_file_name) do |file|
   $content_template = Liquid::Template.parse(file.read)
 end
 
-for url in ARGV do
-  URI.open(url) do |io|
-    json_result = JSON.parse(io.read)
-    for item in json_result['data'] do
-      file_name = $file_name_template.render(item)
-      puts "writing #{file_name}..."
-      content = $content_template.render(item)
-      File.write("#{$output_directory}/#{file_name}", content)
+$url = ARGV.shift
+
+URI.open($url) do |io|
+  json_result = JSON.parse(io.read)
+  for item in json_result['data'] do
+    file_name = $file_name_template.render(item)
+
+    output_path = "#{$output_directory}/#{file_name}"
+
+    if File.exist?(output_path) and not $options[:force] then
+      puts "#{output_path} exists, skipping..."
+      next
     end
+
+    puts "generating #{output_path}..."
+    content = $content_template.render(item)
+    File.write(output_path, content)
   end
 end
