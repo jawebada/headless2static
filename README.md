@@ -26,8 +26,9 @@ your headless CMS of choice. However, *virtually all SSGs* support rendering
 input from your file system (Markdown in particular).
 
 And that is where *headless2static* comes into play. It is the very simple
-common denominator of headless CMSs and SSGs. Just call it to render input
-files for your SSG from the REST resource lists of your headless CMS' API.
+common denominator of headless content management systems and static site
+generators. Just call it to render input files for your SSG from the REST
+resource lists of your headless CMS' API.
 
 ## Example
 
@@ -117,8 +118,40 @@ usage: headless2static [options] template_file url
     -f, --force                      overwrite existing files
 ```
 
+`headless2static` parses the template file, makes a GET request to the URL and
+renders the template once for each item returned in the JSON response. The
+following response variants are supported:
+
+* `[ { }... ]`: loop over array values,
+* `{ 'data': [ { }... ] }`: loop over data array values
+* `{ }`: render object
+
+The output files are written to `DIR`, which defaults to `.`. Existing files
+are not overwritten unless the `-f` option is used.
+
+## Templates
+
+The template file uses the [Liquid](https://shopify.github.io/liquid/) template
+language. [Jekyll filters](https://jekyllrb.com/docs/liquid/filters/), in
+particular `slugify`, are also supported.
+
+The name of the template file determines the name of the output file. In order
+to create unique file names for collection items the template file name may
+also include Liquid code, e.g., `{{title | slugify}}.html`.
+
 ## Installation
 
-`headless2static` is written in Ruby and available as a gem.
+`headless2static` is written in Ruby and available as [a
+gem](https://rubygems.org/gems/headless2static).
+
+You can install it calling
+
+```
+gem install headless2static
+```
+
+## Licence
+
+MIT
 
 {% endraw %}
