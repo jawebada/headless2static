@@ -32,8 +32,9 @@ resource lists of your headless CMS' API.
 
 ## Example
 
-Imagine there is an endpoint of your headless CMS' API at
-`https://example.com/api/items/pages` which returns something like this:
+Imagine there is an endpoint of your headless CMS' API (which might be
+[Directus](https://directus.io/)) at `https://example.com/api/items/pages`
+which returns something like this:
 
 ```javascript
 {
