@@ -9,7 +9,7 @@ require 'json'
 $options = {:"output-directory" => '.'}
 
 parser = OptionParser.new do |opt|
-  opt.banner = "usage: headless2static [options] template_file url..."
+  opt.banner = "usage: headless2static [options] template_file url"
   opt.on("-o DIR", "--output-directory=DIR", "directory in which the output files are saved")
   opt.on("-f", "--force", "overwrite existing files")
 end
